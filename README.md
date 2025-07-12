@@ -47,10 +47,29 @@ The project is organized into the following main directories:
 
 ## Placeholder Execution
 
-Currently, most modules contain placeholder scripts. These can be run individually to see print statements simulating their intended behavior. For example:
+Currently, most modules contain placeholder scripts. The exception is the OCR module, which has a baseline implementation.
+
+### OCR Pipeline Execution
+
+The `ocr/ocr_pipeline.py` script can be run to test a pre-trained Indic OCR model.
 
 ```bash
+# Ensure you have installed the necessary libraries
+pip install transformers torch Pillow sentencepiece
+
+# Run the script
 python ocr/ocr_pipeline.py
+```
+
+The script will download the `QuickHawk/trocr-indic` model (approx. 1GB) on its first run. It will attempt to perform OCR on a sample image located at `ocr/test_images/isha_upanishad_sample.jpg`.
+
+**Note on the Current OCR Model:**
+Initial testing has shown that the `QuickHawk/trocr-indic` model, despite its name and stated goals, does **not** reliably produce Devanagari script output. It tends to output text in an Eastern Nagari (Bengali/Assamese) script. Therefore, it is **not suitable for general Devanagari OCR** without further fine-tuning. The current implementation serves as a functional baseline for how to integrate a TrOCR model.
+
+### Other Modules
+
+For other modules, you can see their placeholder behavior:
+```bash
 python nlp/translation.py
 # etc.
 ```
